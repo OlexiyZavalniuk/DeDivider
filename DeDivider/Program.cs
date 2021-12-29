@@ -12,8 +12,9 @@ namespace DeDivider
         {
             var sw = Stopwatch.StartNew();
             var dictionary = Read("../../../Dictionary/de-dictionary.tsv");
-            var input = Read("../../../Dictionary/de-test-words.tsv");
-            dictionary = dictionary.Select(w => w.ToLower()).ToList();
+            var input0 = Read("../../../Dictionary/de-test-words.tsv");
+            var input = input0.Split("\r\n");
+            dictionary = dictionary.ToLower();
             foreach (var s in input)
             {
                 Console.Write($"{s} -> ");
@@ -31,24 +32,19 @@ namespace DeDivider
             Console.WriteLine(sw.Elapsed);
         }
 
-        static List<string> Read(string path)
+        static string Read(string path)
         {
             using StreamReader sr = new(path);
-            List<string> words = new();
-            while (!sr.EndOfStream)
-            {
-                words.Add(sr.ReadLine());
-            }
+            return sr.ReadToEnd();
 
-            return words;
         }
 
-        static string Dividing(string word, List<string> dictionary, bool first)
+        static string Dividing(string word, string dictionary, bool first)
         {
             for (int i = 0; i < word.Length; i++)
             {
                 var k = word.Substring(0, word.Length - i);
-                if (dictionary.Any(w => w == k))
+                if (dictionary.Contains($"\n{k}\n"))
                 {
                     if (!first && i == 0)
                     {
