@@ -13,7 +13,7 @@ namespace DeDivider
             var sw = Stopwatch.StartNew();
             var dictionary = Read("../../../Dictionary/de-dictionary.tsv");
             var input = Read("../../../Dictionary/de-test-words.tsv");
-            dictionary = dictionary.Select(w => w.ToLower()).ToList();
+            dictionary = dictionary.Select(w => w.ToLower()).ToHashSet();
             foreach (var s in input)
             {
                 Console.Write($"{s} -> ");
@@ -31,10 +31,10 @@ namespace DeDivider
             Console.WriteLine(sw.Elapsed);
         }
 
-        static List<string> Read(string path)
+        static HashSet<string> Read(string path)
         {
             using StreamReader sr = new(path);
-            List<string> words = new();
+            HashSet<string> words = new();
             while (!sr.EndOfStream)
             {
                 words.Add(sr.ReadLine());
@@ -43,7 +43,7 @@ namespace DeDivider
             return words;
         }
 
-        static string Dividing(string word, List<string> dictionary, bool first)
+        static string Dividing(string word, HashSet<string> dictionary, bool first)
         {
             for (int i = 0; i < word.Length; i++)
             {
