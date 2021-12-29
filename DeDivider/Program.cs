@@ -48,7 +48,7 @@ namespace DeDivider
             for (int i = 0; i < word.Length; i++)
             {
                 var k = word.Substring(0, word.Length - i);
-                if (dictionary.Any(w => w == k))
+                if (dictionary.Contains(k))
                 {
                     if (!first && i == 0)
                     {
