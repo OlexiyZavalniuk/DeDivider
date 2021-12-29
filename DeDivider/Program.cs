@@ -13,6 +13,7 @@ namespace DeDivider
             var sw = Stopwatch.StartNew();
             var dictionary = Read("../../../Dictionary/de-dictionary.tsv");
             var input = Read("../../../Dictionary/de-test-words.tsv");
+            dictionary = dictionary.Select(w => w.ToLower()).ToHashSet();
             foreach (var s in input)
             {
                 Console.Write($"{s} -> ");
@@ -36,7 +37,7 @@ namespace DeDivider
             List<string> words = new();
             while (!sr.EndOfStream)
             {
-                words.Add(sr.ReadLine().ToLower());
+                words.Add(sr.ReadLine());
             }
 
             return words;
