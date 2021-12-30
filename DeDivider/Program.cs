@@ -10,40 +10,75 @@ namespace DeDivider
     {
         static void Main(string[] args)
         {
-            var sw = Stopwatch.StartNew();
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("-------------  Hello  -------------");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("----  Enter path to read words ----");
+            Console.Write(">");
+            var input_path = Console.ReadLine();
+            Console.WriteLine("-------------   OK   --------------");
+            Console.WriteLine("---  Enter path to write result ---");
+            Console.Write(">");
+            var output_path = Console.ReadLine();
+            Console.WriteLine("-------------   OK   --------------");
+            Console.WriteLine("Run...");
+
+            try
+            {
+                var sw = Stopwatch.StartNew();
+                Do(input_path, output_path);
+                sw.Stop();
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("DONE!");
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine($"Execution time: {sw.Elapsed}");
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("ERROR: maybe your path is wrong?");
+            }
+
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("-------- Enter sth to exit  -------");
+            Console.ReadKey();
+        }
+
+        static void Do(string input_path, string output_path)
+        {
             var dictionary = Read("../../../Dictionary/de-dictionary.tsv");
-            var input = Read("../../../Dictionary/de-test-words.tsv");
-            dictionary = dictionary.Select(w => w.ToLower()).ToList();
+            var input = Read(input_path);
+            using StreamWriter sw = new(output_path);
+
             foreach (var s in input)
             {
-                Console.Write($"{s} -> ");
-                var res = Dividing(s, dictionary, true);
+                sw.Write($"(in) {s} -> ");
+                var res = Divide(s, dictionary);
                 if (res == "")
                 {
-                    Console.Write($"{s}\n");
+                    sw.Write($"(out) {s}\n");
                 }
                 else
                 {
-                    Console.Write($"{res}\n");
+                    sw.Write($"(out) {res}\n");
                 }
             }
-            sw.Stop();
-            Console.WriteLine(sw.Elapsed);
         }
 
-        static List<string> Read(string path)
+        static HashSet<string> Read(string path)
         {
             using StreamReader sr = new(path);
-            List<string> words = new();
+            HashSet<string> words = new();
             while (!sr.EndOfStream)
             {
-                words.Add(sr.ReadLine());
+                words.Add(sr.ReadLine().ToLower());
             }
 
             return words;
         }
 
-        static string Dividing(string word, List<string> dictionary, bool first)
+        static string Divide(string word, HashSet<string> dictionary, bool first = true)
         {
             for (int i = 0; i < word.Length; i++)
             {
@@ -54,7 +89,7 @@ namespace DeDivider
                     {
                         return k;
                     }
-                    var res = Dividing(word.Substring(word.Length - i), dictionary, false);
+                    var res = Divide(word.Substring(word.Length - i), dictionary, false);
                     if (res != "")
                     {
                         return $"{k}, {res}";
