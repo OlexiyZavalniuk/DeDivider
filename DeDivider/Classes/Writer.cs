@@ -14,7 +14,7 @@ namespace DeDivider.Classes
             foreach (var word in input)
             {
                 streamWriter.Write($"(in) {word} -> ");
-                var result = Devider.Divide(word, dictionary);
+                var result = Divider.Divide(word, dictionary);
                 streamWriter.Write($"(out) {result}\n");
             }
         }

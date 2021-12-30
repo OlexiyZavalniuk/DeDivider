@@ -3,7 +3,7 @@
 
 namespace DeDivider.Classes
 {
-    class Devider
+    class Divider
     {
         internal static string Divide(string word, HashSet<string> dictionary, bool first = true)
         {
