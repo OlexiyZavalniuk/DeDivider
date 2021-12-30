@@ -9,13 +9,13 @@ namespace DeDivider.Classes
         {
             var dictionary = Reader.Read("../../../Dictionary/de-dictionary.tsv");
             var input = Reader.Read(input_path);
-            using StreamWriter sw = new(output_path);
+            using StreamWriter streamWriter = new(output_path);
 
             foreach (var word in input)
             {
-                sw.Write($"(in) {word} -> ");
-                var res = Devider.Divide(word, dictionary);
-                sw.Write(res == "" ? $"(out) {word}\n" : $"(out) {res}\n");
+                streamWriter.Write($"(in) {word} -> ");
+                var result = Devider.Divide(word, dictionary);
+                streamWriter.Write(result == "" ? $"(out) {word}\n" : $"(out) {result}\n");
             }
         }
     }

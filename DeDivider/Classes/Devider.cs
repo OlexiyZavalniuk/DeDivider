@@ -16,12 +16,12 @@ namespace DeDivider.Classes
 
             for (; i < word.Length; i++)
             {
-                var w = word.Substring(0, word.Length - i);
-                if (dictionary.Contains(w))
+                var section = word.Substring(0, word.Length - i);
+                if (dictionary.Contains(section))
                 {
-                    var res = Divide(word[^i..], dictionary, false);
-                    if (res != "")
-                        return $"{w}, {res}";
+                    var result = Divide(word[^i..], dictionary, false);
+                    if (result != "")
+                        return $"{section}, {result}";
                 }
             }
             return "";

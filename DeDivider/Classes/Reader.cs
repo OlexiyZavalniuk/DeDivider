@@ -7,11 +7,11 @@ namespace DeDivider.Classes
     {
         internal static HashSet<string> Read(string path)
         {
-            using StreamReader sr = new(path);
+            using StreamReader streamReader = new(path);
             HashSet<string> words = new();
-            while (!sr.EndOfStream)
+            while (!streamReader.EndOfStream)
             {
-                words.Add(sr.ReadLine().ToLower());
+                words.Add(streamReader.ReadLine().ToLower());
             }
 
             return words;

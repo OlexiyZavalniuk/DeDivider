@@ -8,22 +8,18 @@ namespace DeDivider
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("-----------------------------------");
-            Console.WriteLine("-------------  Hello  -------------");
-            Console.WriteLine("-----------------------------------");
-            Console.WriteLine("----  Enter path to read words ----");
-            Console.WriteLine("");
+            Console.WriteLine("-----------------------------------\n" +
+                              "-------------  Hello  -------------\n" +
+                              "-----------------------------------\n" +
+                              "----  Enter path to read words ----\n");
             Console.Write(">");
             var input_path = Console.ReadLine();
-            Console.WriteLine("");
-            Console.WriteLine("-------------   OK   --------------");
-            Console.WriteLine("---  Enter path to write result ---");
-            Console.WriteLine("");
-            Console.Write(">");
+            Console.WriteLine("\n-------------   OK   --------------\n" +
+                              "---  Enter path to write result ---");
+            Console.Write("\n>");
             var output_path = Console.ReadLine();
-            Console.WriteLine("");
-            Console.WriteLine("-------------   OK   --------------");
-            Console.WriteLine("Run...");
+            Console.WriteLine("\n-------------   OK   --------------\n" +
+                              "Run...");
 
             try
             {
@@ -31,19 +27,19 @@ namespace DeDivider
                 Writer.Write(input_path, output_path);
                 sw.Stop();
 
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine("DONE!");
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine($"Execution time: {sw.Elapsed}");
+                Console.WriteLine("-----------------------------------\n" +
+                                  "DONE!\n" +
+                                  "-----------------------------------\n" +
+                                  $"Execution time: {sw.Elapsed}");
             }
             catch(Exception)
             {
-                Console.WriteLine("-----------------------------------");
-                Console.WriteLine("ERROR: maybe your path is wrong?");
+                Console.WriteLine("-----------------------------------\n" +
+                                  "ERROR: maybe your path is wrong?");
             }
 
-            Console.WriteLine("-----------------------------------");
-            Console.WriteLine("-------- Enter sth to exit  -------");
+            Console.WriteLine("-----------------------------------\n" +
+                              "-------- Enter sth to exit  -------");
             Console.ReadKey();
         }
     }
