@@ -15,7 +15,7 @@ namespace DeDivider.Classes
             {
                 streamWriter.Write($"(in) {word} -> ");
                 var result = Divider.Divide(word, dictionary);
-                streamWriter.Write($"(out) {result}\n");
+                streamWriter.Write(result == "" ? $"(out) {word}\n" : $"(out) {result}\n");
             }
         }
     }
